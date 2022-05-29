@@ -1,7 +1,0 @@
-﻿  main.cpp
-  Generating code
-  Previous IPDB and IOBJ mismatch, fall back to full compilation.
-C:\Users\Ouki\Desktop\Injector\Loader\memory.hpp(25): warning C4715: 'Injector::GetModule': not all control paths return a value
-  All 92 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
-  Finished generating code
-  Loader.vcxproj -> C:\Users\Ouki\Desktop\Injector\Release\Loader.exe

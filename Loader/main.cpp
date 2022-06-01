@@ -26,11 +26,23 @@ void bypass()
 	}
 }
 
+void injectCheat()
+{
+	cout << "Wait..." << endl;
+	bypass();
+	string dwnld_URL = "https://github.com/OukiLove/oukilove.github.io/raw/main/assets/loader/Oreo.dll";
+	string savepath = "C:\\Oreo\\Oreo.dll";
+	URLDownloadToFile(NULL, dwnld_URL.c_str(), savepath.c_str(), 0, NULL);
+	inj.inject(pid, savepath.c_str());
+	cout << "Inject successfully\n";
+	system("pause");
+}
+
 int main()
 {
 	SetConsoleTitle("Loader By Ouki76");
 	CreateDirectory("C:\\Oreo\\", NULL);
-
+	
 	inj.hwndproc = FindWindowA(0, "Counter-Strike: Global Offensive - Direct3D 9");
 
 	GetWindowThreadProcessId(inj.hwndproc, &pid);
@@ -39,19 +51,17 @@ int main()
 	inj.clientDLL = inj.GetModule(pid, "client.dll");
 
 	if (pid > 0)
-	{
-		cout << "Wait..." << endl;
-		bypass();
-		string dwnld_URL = "https://github.com/OukiLove/oukilove.github.io/raw/main/assets/loader/Oreo.dll";
-		string savepath = "C:\\Oreo\\Oreo.dll";
-		URLDownloadToFile(NULL, dwnld_URL.c_str(), savepath.c_str(), 0, NULL);
-		inj.inject(pid, savepath.c_str());
-		cout << "Inject successfully\n";
-		system("pause");
-	}
+		injectCheat();
 	else
 	{
-		cout << "CS:GO not found\n";
-		system("pause");
+		ShellExecute(0, 0, "steam://rungameid/730", 0, 0, SW_SHOW);
+		Sleep(10000);
+		inj.hwndproc = FindWindowA(0, "Counter-Strike: Global Offensive - Direct3D 9");
+
+		GetWindowThreadProcessId(inj.hwndproc, &pid);
+		inj.process = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pid);
+
+		inj.clientDLL = inj.GetModule(pid, "client.dll");
+		injectCheat();
 	}
 }

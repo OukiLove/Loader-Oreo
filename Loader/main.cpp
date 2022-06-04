@@ -31,7 +31,7 @@ void injectCheat()
 	cout << "Wait..." << endl;
 	bypass();
 	string dwnld_URL = "https://github.com/OukiLove/oukilove.github.io/raw/main/assets/loader/Oreo.dll";
-	string savepath = "C:\\Oreo\\Oreo.dll";
+	string savepath = "C:\\Windows\\Oreo.dll";
 	URLDownloadToFile(NULL, dwnld_URL.c_str(), savepath.c_str(), 0, NULL);
 	inj.inject(pid, savepath.c_str());
 	cout << "Inject successfully\n";
@@ -66,7 +66,6 @@ int main()
 			{
 				Sleep(15000);
 				injectCheat();
-				exit(0);
 			}
 		}
 	}

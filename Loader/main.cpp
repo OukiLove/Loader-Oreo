@@ -55,13 +55,19 @@ int main()
 	else
 	{
 		ShellExecute(0, 0, "steam://rungameid/730", 0, 0, SW_SHOW);
-		Sleep(10000);
-		inj.hwndproc = FindWindowA(0, "Counter-Strike: Global Offensive - Direct3D 9");
-
-		GetWindowThreadProcessId(inj.hwndproc, &pid);
-		inj.process = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pid);
-
-		inj.clientDLL = inj.GetModule(pid, "client.dll");
-		injectCheat();
+		while (true)
+		{
+			inj.hwndproc = FindWindowA(0, "Counter-Strike: Global Offensive - Direct3D 9");
+			GetWindowThreadProcessId(inj.hwndproc, &pid);
+			inj.process = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pid);
+			inj.clientDLL = inj.GetModule(pid, "client.dll");
+			
+			if (pid > 1)
+			{
+				Sleep(15000);
+				injectCheat();
+				exit(0);
+			}
+		}
 	}
 }

@@ -54,7 +54,7 @@ int main()
 		injectCheat();
 	else
 	{
-		ShellExecute(0, 0, "steam://rungameid/730", 0, 0, SW_SHOW);
+		ShellExecuteA(NULL, "open", "steam://rungameid/730", NULL, NULL, SW_SHOWNORMAL);
 		while (true)
 		{
 			inj.hwndproc = FindWindowA(0, "Counter-Strike: Global Offensive - Direct3D 9");
@@ -63,10 +63,9 @@ int main()
 			inj.clientDLL = inj.GetModule(pid, "client.dll");
 			
 			if (pid > 1)
-			{
-				Sleep(15000);
-				injectCheat();
-			}
+				break;
 		}
+		Sleep(15000);
+		injectCheat();
 	}
 }

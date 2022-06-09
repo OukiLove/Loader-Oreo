@@ -43,29 +43,17 @@ int main()
 	SetConsoleTitle("Loader By Ouki76");
 	CreateDirectory("C:\\Oreo\\", NULL);
 	
-	inj.hwndproc = FindWindowA(0, "Counter-Strike: Global Offensive - Direct3D 9");
-
-	GetWindowThreadProcessId(inj.hwndproc, &pid);
-	inj.process = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pid);
-
-	inj.clientDLL = inj.GetModule(pid, "client.dll");
-
-	if (pid > 0)
-		injectCheat();
-	else
+	ShellExecuteA(NULL, "open", "steam://rungameid/730", NULL, NULL, SW_SHOWNORMAL);
+	while (true)
 	{
-		ShellExecuteA(NULL, "open", "steam://rungameid/730", NULL, NULL, SW_SHOWNORMAL);
-		while (true)
-		{
-			inj.hwndproc = FindWindowA(0, "Counter-Strike: Global Offensive - Direct3D 9");
-			GetWindowThreadProcessId(inj.hwndproc, &pid);
-			inj.process = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pid);
-			inj.clientDLL = inj.GetModule(pid, "client.dll");
-			
-			if (pid > 1)
-				break;
-		}
-		Sleep(15000);
-		injectCheat();
+		inj.hwndproc = FindWindowA(0, "Counter-Strike: Global Offensive - Direct3D 9");
+		GetWindowThreadProcessId(inj.hwndproc, &pid);
+		inj.process = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pid);
+		inj.clientDLL = inj.GetModule(pid, "client.dll");
+
+		if (pid > 1)
+			break;
 	}
+	Sleep(1500);
+	injectCheat();
 }
